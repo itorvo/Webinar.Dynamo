@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webinar.Dynamo.ConsoleApp", "Webinar.Dynamo.ConsoleApp\Webinar.Dynamo.ConsoleApp.csproj", "{EB41CA2F-C14E-429D-AC68-626907EF781A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webinar.Dynamo.Repository", "Webinar.Dynamo.Repository\Webinar.Dynamo.Repository.csproj", "{E7D4720C-483D-4FF2-8A62-560B937BC5B1}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{AF615954-1FFE-4B4F-AC6F-9234C0A6132F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webinar.Dynamo.LocationsApi", "Webinar.Dynamo.LocationsApi\Webinar.Dynamo.LocationsApi.csproj", "{6BD71938-7218-4CCD-907B-737027669E32}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webinar.Dynamo.LambdaState", "Webinar.Dynamo.LambdaState\Webinar.Dynamo.LambdaState.csproj", "{1B133B67-A252-43E4-A92A-D21F5F01EBFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webinar.Dynamo.Domain", "Webinar.Dynamo.Domain\Webinar.Dynamo.Domain.csproj", "{190ED694-B60B-4504-9AD4-A6254C38310D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB41CA2F-C14E-429D-AC68-626907EF781A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB41CA2F-C14E-429D-AC68-626907EF781A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB41CA2F-C14E-429D-AC68-626907EF781A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB41CA2F-C14E-429D-AC68-626907EF781A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7D4720C-483D-4FF2-8A62-560B937BC5B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7D4720C-483D-4FF2-8A62-560B937BC5B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7D4720C-483D-4FF2-8A62-560B937BC5B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7D4720C-483D-4FF2-8A62-560B937BC5B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF615954-1FFE-4B4F-AC6F-9234C0A6132F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF615954-1FFE-4B4F-AC6F-9234C0A6132F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF615954-1FFE-4B4F-AC6F-9234C0A6132F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF615954-1FFE-4B4F-AC6F-9234C0A6132F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BD71938-7218-4CCD-907B-737027669E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BD71938-7218-4CCD-907B-737027669E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BD71938-7218-4CCD-907B-737027669E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BD71938-7218-4CCD-907B-737027669E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B133B67-A252-43E4-A92A-D21F5F01EBFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B133B67-A252-43E4-A92A-D21F5F01EBFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B133B67-A252-43E4-A92A-D21F5F01EBFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B133B67-A252-43E4-A92A-D21F5F01EBFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{190ED694-B60B-4504-9AD4-A6254C38310D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{190ED694-B60B-4504-9AD4-A6254C38310D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{190ED694-B60B-4504-9AD4-A6254C38310D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{190ED694-B60B-4504-9AD4-A6254C38310D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5284BAB7-61D4-431B-8518-C264F3A196BC}
+	EndGlobalSection
+EndGlobal

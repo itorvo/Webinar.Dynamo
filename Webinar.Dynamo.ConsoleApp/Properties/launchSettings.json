@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Webinar.Dynamo.ConsoleApp": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
