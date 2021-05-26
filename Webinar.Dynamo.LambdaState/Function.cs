@@ -2,7 +2,10 @@ using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
+using System.Collections.Generic;
+using System.Net;
 using Webinar.Dynamo.Domain.Domain;
 using Webinar.Dynamo.Domain.Entities;
 
@@ -15,12 +18,19 @@ namespace Webinar.Dynamo.LambdaState
     {
         private readonly ICountryDomainService CountryDomainService;
         private readonly IStateDomainService StateDomainService;
+        private readonly JsonSerializerSettings JsonSerializerSettings;
 
         public Function()
         {
             ServiceProvider Provider = new Startup().ServiceProvider;
             CountryDomainService = Provider.GetService<ICountryDomainService>();
             StateDomainService = Provider.GetService<IStateDomainService>();
+
+            JsonSerializerSettings = new JsonSerializerSettings
+            {
+                ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
+                Formatting = Formatting.Indented
+            };
         }
 
         public APIGatewayProxyResponse FunctionHandler(APIGatewayProxyRequest request, ILambdaContext lambdaContext)
@@ -77,7 +87,7 @@ namespace Webinar.Dynamo.LambdaState
             APIGatewayProxyResponse response = new APIGatewayProxyResponse
             {
                 StatusCode = 200,
-                Body = JsonConvert.SerializeObject(result)
+                Body = JsonConvert.SerializeObject(result, JsonSerializerSettings)
             };
             return response;
         }
@@ -89,7 +99,7 @@ namespace Webinar.Dynamo.LambdaState
             APIGatewayProxyResponse response = new APIGatewayProxyResponse
             {
                 StatusCode = 200,
-                Body = JsonConvert.SerializeObject(result)
+                Body = JsonConvert.SerializeObject(result, JsonSerializerSettings)
             };
             return response;
         }
@@ -99,8 +109,9 @@ namespace Webinar.Dynamo.LambdaState
             return request.HttpMethod switch
             {
                 "POST" => CreateState(request),
-                "GET" => GetStates(),
+                "GET" => GetStates(request),
                 "DELETE" => DeleteState(request),
+                "PATCH" => UpdateState(request),
                 _ => new APIGatewayProxyResponse
                 {
                     StatusCode = 400,
@@ -109,15 +120,27 @@ namespace Webinar.Dynamo.LambdaState
             };
         }
 
-        public APIGatewayProxyResponse GetStates()
+        public APIGatewayProxyResponse GetStates(APIGatewayProxyRequest request)
         {
-            var result = StateDomainService.GetAll();
+            string @value = GetParameter(request.QueryStringParameters, "limit");
+            int limit = int.Parse(@value ?? "0");
+
+            @value = GetParameter(request.QueryStringParameters, "paginationToken");
+            string paginationToken = WebUtility.UrlDecode(@value ?? "{}");
+
+            var result = StateDomainService.GetAll(paginationToken, limit);
+
             APIGatewayProxyResponse response = new APIGatewayProxyResponse
             {
                 StatusCode = 200,
-                Body = JsonConvert.SerializeObject(result)
+                Body = JsonConvert.SerializeObject(result, JsonSerializerSettings)
             };
             return response;
+        }
+
+        private string GetParameter(IDictionary<string, string> parameters, string nameParams)
+        {
+            return parameters.TryGetValue(nameParams, out string @value) ? @value : null;
         }
 
         public APIGatewayProxyResponse CreateState(APIGatewayProxyRequest request)
@@ -127,7 +150,7 @@ namespace Webinar.Dynamo.LambdaState
             APIGatewayProxyResponse response = new APIGatewayProxyResponse
             {
                 StatusCode = 200,
-                Body = JsonConvert.SerializeObject(result)
+                Body = JsonConvert.SerializeObject(result, JsonSerializerSettings)
             };
             return response;
         }
@@ -141,7 +164,21 @@ namespace Webinar.Dynamo.LambdaState
             APIGatewayProxyResponse response = new APIGatewayProxyResponse
             {
                 StatusCode = 200,
-                Body = JsonConvert.SerializeObject(result)
+                Body = JsonConvert.SerializeObject(result, JsonSerializerSettings)
+            };
+            return response;
+        }
+
+        public APIGatewayProxyResponse UpdateState(APIGatewayProxyRequest request)
+        {
+            var state = JsonConvert.DeserializeObject<State>(request.Body);
+
+            var result = StateDomainService.Update(state);
+
+            APIGatewayProxyResponse response = new APIGatewayProxyResponse
+            {
+                StatusCode = 200,
+                Body = JsonConvert.SerializeObject(result, JsonSerializerSettings)
             };
             return response;
         }
