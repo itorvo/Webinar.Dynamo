@@ -23,11 +23,16 @@ namespace Webinar.Dynamo.ConsoleApp
                .AddJsonFile("appsettings.json", true, true)
                .Build();
 
-            IStateRepository stateRepository = new StateRepository(config);
+            //IStateRepository stateRepository = new StateRepository(config);
             ICountryRepository countryRepository = new CountryRepository(config);
 
-            FillTables(stateRepository, countryRepository);
-            GetStatesByCountryPaginatedControl(stateRepository);
+            bool result = countryRepository.Remove(new Country
+            {
+                Code="CA",
+                Name="Caquetá"
+            });
+
+            Console.WriteLine(result);
         }
 
         private static void FillTables(IStateRepository stateRepository, ICountryRepository countryRepository)
