@@ -34,3 +34,9 @@ services:
       AWS_SECRET_ACCESS_KEY: 'DUMMYEXAMPLEKEY'
     command:
       dynamodb describe-limits --endpoint-url http://dynamodb-local:8000 --region us-west-2
+  webinar.dynamo.locationsapi:
+    image: ${DOCKER_REGISTRY-}webinardynamolocationsapi
+    build:
+      context: .
+      dockerfile: Webinar.Dynamo.LocationsApi/Dockerfile
+

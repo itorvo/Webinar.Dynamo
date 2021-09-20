@@ -1,3 +1,10 @@
 version: '3.4'
 services:
   webinar.dynamo.consoleapp:
+
+  webinar.dynamo.locationsapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+

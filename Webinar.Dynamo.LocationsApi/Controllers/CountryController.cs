@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System;
-using Webinar.Dynamo.Domain.Domain;
-using Webinar.Dynamo.Domain.Entities;
+using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,11 +10,9 @@ namespace Webinar.Dynamo.LocationsApi.Controllers
     [ApiController]
     public class CountryController : ControllerBase
     {
-        private readonly ICountryDomainService CountryDomainService;
 
-        public CountryController(ICountryDomainService countryDomainService)
+        public CountryController()
         {
-            CountryDomainService = countryDomainService;
         }
 
         // GET: api/<CountryController>
@@ -25,7 +21,7 @@ namespace Webinar.Dynamo.LocationsApi.Controllers
         {
             try
             {
-                var result = CountryDomainService.GetAll();
+                var result = GetData();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -34,19 +30,10 @@ namespace Webinar.Dynamo.LocationsApi.Controllers
             }
         }
 
-        // POST api/<CountryController>
-        [HttpPost]
-        public IActionResult Post([FromBody] Country country)
+        private List<dynamic> GetData()
         {
-            try
-            {
-                bool result = CountryDomainService.Add(country);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var txt = System.IO.File.ReadAllText(@"Resources/inputCountries.txt");
+            return System.Text.Json.JsonSerializer.Deserialize<List<dynamic>>(txt);
         }
     }
 }
