@@ -23,16 +23,18 @@ namespace Webinar.Dynamo.ConsoleApp
                .AddJsonFile("appsettings.json", true, true)
                .Build();
 
-            //IStateRepository stateRepository = new StateRepository(config);
+            IStateRepository stateRepository = new StateRepository(config);
             ICountryRepository countryRepository = new CountryRepository(config);
 
-            bool result = countryRepository.Remove(new Country
-            {
-                Code="CA",
-                Name="Caquetá"
-            });
+            FillTables(stateRepository, countryRepository);
 
-            Console.WriteLine(result);
+            //bool result = countryRepository.Remove(new Country
+            //{
+            //    Code="CA",
+            //    Name="Caquetá"
+            //});
+
+            //Console.WriteLine(result);
         }
 
         private static void FillTables(IStateRepository stateRepository, ICountryRepository countryRepository)
@@ -40,11 +42,12 @@ namespace Webinar.Dynamo.ConsoleApp
             string json = File.ReadAllText(@"Resources\inputStates.txt");
             List<State> states = JsonConvert.DeserializeObject<List<State>>(json);
             states = states.FindAll(s => !string.IsNullOrEmpty(s.Code) && !string.IsNullOrEmpty(s.Country));
+            states = states.FindAll(s => s.Country == "CO" );
             Console.WriteLine($"Full Table: {stateRepository.Add(states)}");
 
             json = File.ReadAllText(@"Resources\inputCountries.txt");
             List<Country> countries = JsonConvert.DeserializeObject<List<Country>>(json);
-            countries = countries.FindAll(c => !string.IsNullOrEmpty(c.Code));
+            countries = countries.FindAll(c => !string.IsNullOrEmpty(c.Code) && (c.Code =="CO"|| c.Code =="US"));
             Console.WriteLine($"Full Table: {countryRepository.Add(countries)}");
         }
 

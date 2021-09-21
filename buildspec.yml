@@ -1,0 +1,17 @@
+version: 0.2 
+ 
+env: 
+  variables: 
+    LAMBDA_NAME: "Locations"
+ 
+phases: 
+  build: 
+    commands: 
+      - echo Instalando tools
+      - dotnet tool install -g Amazon.Lambda.Tools
+      - echo Restaurando paquetes y dependencias... 
+      - dotnet restore -s https://api.nuget.org/v3/index.json
+      - echo Cambiando a directorio Webinar.Dynamo.LambdaState... 
+      - cd Webinar.Dynamo.LambdaState
+      - echo Desplegando función lambda... 
+      - dotnet-lambda deploy-function $LAMBDA_NAME_DEV;
