@@ -16,11 +16,13 @@ namespace Webinar.Dynamo.Domain.Repository
         {
             FilterCountryCO = new FilterCondition
             {
-                AtributeName = "Country",
+                AtributeName = nameof(State.Country),
                 Operator = DynamoDbFilterOperator.Equal,
                 ValueAtribute = "CO",
                 TypeCondition = DynamoDbTypeCondition.Query
             };
+
+            IndexNames = new List<string> { "cfckmlkc", "dscdcs" };
         }
 
         public QueryResponse<State> GetAllPaginated(string paginationToken, int limit)

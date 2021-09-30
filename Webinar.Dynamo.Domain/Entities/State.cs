@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Webinar.Dynamo.Domain.Entities
 {
+    [DynamoDBTable("Location")]
     public class State
     {
         [DynamoDBHashKey]

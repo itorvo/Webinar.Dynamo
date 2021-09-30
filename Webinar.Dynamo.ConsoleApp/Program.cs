@@ -26,15 +26,10 @@ namespace Webinar.Dynamo.ConsoleApp
             IStateRepository stateRepository = new StateRepository(config);
             ICountryRepository countryRepository = new CountryRepository(config);
 
+            GetStatesByCountryPaginatedControl(stateRepository);
+
             FillTables(stateRepository, countryRepository);
 
-            //bool result = countryRepository.Remove(new Country
-            //{
-            //    Code="CA",
-            //    Name="Caquetá"
-            //});
-
-            //Console.WriteLine(result);
         }
 
         private static void FillTables(IStateRepository stateRepository, ICountryRepository countryRepository)
@@ -42,12 +37,12 @@ namespace Webinar.Dynamo.ConsoleApp
             string json = File.ReadAllText(@"Resources\inputStates.txt");
             List<State> states = JsonConvert.DeserializeObject<List<State>>(json);
             states = states.FindAll(s => !string.IsNullOrEmpty(s.Code) && !string.IsNullOrEmpty(s.Country));
-            states = states.FindAll(s => s.Country == "CO" );
+            states = states.FindAll(s => s.Country == "CO");
             Console.WriteLine($"Full Table: {stateRepository.Add(states)}");
 
             json = File.ReadAllText(@"Resources\inputCountries.txt");
             List<Country> countries = JsonConvert.DeserializeObject<List<Country>>(json);
-            countries = countries.FindAll(c => !string.IsNullOrEmpty(c.Code) && (c.Code =="CO"|| c.Code =="US"));
+            countries = countries.FindAll(c => !string.IsNullOrEmpty(c.Code) && (c.Code == "CO" || c.Code == "US"));
             Console.WriteLine($"Full Table: {countryRepository.Add(countries)}");
         }
 
@@ -67,7 +62,7 @@ namespace Webinar.Dynamo.ConsoleApp
                 paginationToken = pagTokens[currentPage - 1];
                 FilterResponse<State> response = stateRepository.GetStateByCountry("CO", limit, paginationToken);
                 ListStates(response.Elements);
-                Console.WriteLine($"Pagina: {currentPage}");
+                Console.WriteLine($"Pagina: {currentPage} - {response.PaginationToken}");
 
                 if (currentPage == 1)
                 {

@@ -21,11 +21,13 @@ namespace Webinar.Dynamo.Repository
         protected readonly IConfiguration Configuration;
         protected AmazonDynamoDBClient Client;
         private readonly Type typeTEntity;
+        protected List<string> IndexNames;
 
         protected DynamoRepository(IConfiguration configuration)
         {
             typeTEntity = typeof(TEntity);
             Configuration = configuration;
+            IndexNames = new List<string>();
             GetClient();
         }
 
