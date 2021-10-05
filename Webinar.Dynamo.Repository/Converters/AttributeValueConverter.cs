@@ -58,8 +58,8 @@ namespace Webinar.Dynamo.Repository.Converters
 
         private static readonly IDictionary<Type, Func<object, AttributeValue>> convertToAttributeValue = new Dictionary<Type, Func<object, AttributeValue>>
         {
-            { typeof(bool), (object @object) => new AttributeValue { BOOL = bool.Parse($"{@object}")} },
-            { typeof(bool?), (object @object) => GetNullableAttributeValue(@object, (AttributeValue attributeValue) => attributeValue.BOOL = bool.Parse($"{@object}")) },
+            { typeof(bool), (object @object) => new AttributeValue { N = Convert.ToInt32(@object).ToString() } },
+            { typeof(bool?), (object @object) => GetNullableAttributeValue(@object, (AttributeValue attributeValue) => attributeValue.N = Convert.ToInt32(@object).ToString() ) },
             { typeof(byte), (object @object) => new AttributeValue { N = $"{@object}" } },
             { typeof(byte?), (object @object) => GetNullableAttributeValue(@object, (AttributeValue attributeValue) => attributeValue.N = $"{@object}") },
             { typeof(byte[]), (object @object) => GetNullableAttributeValue(@object, (AttributeValue attributeValue) => attributeValue.B = new MemoryStream((byte[])@object), () => @object != null && ((byte[])@object).Length > 0) },
