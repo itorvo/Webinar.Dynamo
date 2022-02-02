@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System;
 using Webinar.Dynamo.Domain.Domain;
 using Webinar.Dynamo.Domain.Entities;

@@ -12,6 +12,8 @@ namespace Webinar.Dynamo.ConsoleApp
 {
     class Program
     {
+        private static IConfiguration Config;
+        
         protected Program()
         {
 
@@ -19,17 +21,30 @@ namespace Webinar.Dynamo.ConsoleApp
 
         static void Main(string[] args)
         {
-            IConfiguration config = new ConfigurationBuilder()
-               .AddJsonFile("appsettings.json", true, true)
-               .Build();
+            Config = new ConfigurationBuilder()
+              .AddJsonFile("appsettings.json", true, true)
+              .Build();
 
-            IStateRepository stateRepository = new StateRepository(config);
-            ICountryRepository countryRepository = new CountryRepository(config);
+            args.ToList().ForEach(arg => Console.WriteLine(arg));
+
+            var environments = Environment.GetEnvironmentVariables();
+            var keys = environments.Keys;
+
+            foreach (var key in keys)
+            {
+                Console.WriteLine($"{key}:{environments[key]}");
+            }
+        }
+
+        private static void FillTables()
+        {
+            IStateRepository stateRepository = new StateRepository(Config);
+            ICountryRepository countryRepository = new CountryRepository(Config);
 
             GetStatesByCountryPaginatedControl(stateRepository);
 
             FillTables(stateRepository, countryRepository);
-
+            GetStatesByCountryPaginatedControl(stateRepository);
         }
 
         private static void FillTables(IStateRepository stateRepository, ICountryRepository countryRepository)

@@ -2,7 +2,7 @@
 
 namespace Webinar.Dynamo.Domain.Entities
 {
-    [DynamoDBTable("Location")]
+    //[DynamoDBTable("Location")]
     public class Country
     {
         public string Code { get; set; }

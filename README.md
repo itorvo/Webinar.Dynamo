@@ -21,7 +21,7 @@ Example use Dynamo in C#
 `docker run -p 8000:8000 amazon/dynamodb-local:latest`
 
 ### Create Table State
-`aws dynamodb create-table --table-name State --attribute-definitions AttributeName=Country,AttributeType=S AttributeName=Code,AttributeType=S --key-schema AttributeName=Country,KeyType=HASH AttributeName=Code,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --endpoint-url http://localhost:8000`
+`aws dynamodb create-table --table-name Location --attribute-definitions AttributeName=Country,AttributeType=S AttributeName=Code,AttributeType=S --key-schema AttributeName=Country,KeyType=HASH AttributeName=Code,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --endpoint-url http://localhost:8000`
 
 ### Create Table Country
 `aws dynamodb create-table --table-name Country --attribute-definitions AttributeName=Code,AttributeType=S AttributeName=Name,AttributeType=S --key-schema AttributeName=Code,KeyType=HASH AttributeName=Name,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --endpoint-url http://localhost:8000`
@@ -33,7 +33,7 @@ Example use Dynamo in C#
 `aws dynamodb list-tables --endpoint-url http://localhost:8000`
 
 ## List Element by Scan
-`aws dynamodb scan --table-name State --endpoint-url http://localhost:8000`
+`aws dynamodb scan --table-name Country --endpoint-url http://localhost:8000`
 
 ## Delete table
 `aws dynamodb delete-table --table-name State --endpoint-url http://localhost:8000`

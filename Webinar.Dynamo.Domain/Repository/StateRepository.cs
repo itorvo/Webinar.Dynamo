@@ -206,7 +206,7 @@ namespace Webinar.Dynamo.Domain.Repository
                 {
                     new FilterCondition
                     {
-                        AtributeName = "Country",
+                        AtributeName = nameof(State.Country),
                         Operator = DynamoDbFilterOperator.Equal,
                         ValueAtribute = country,
                         TypeCondition = DynamoDbTypeCondition.Query
