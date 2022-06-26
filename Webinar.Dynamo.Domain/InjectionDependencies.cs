@@ -6,7 +6,7 @@ namespace Webinar.Dynamo.Domain
 {
     public static class InjectionDependencies
     {
-        public static void InjectionServices(IServiceCollection services)
+        public static void InjectionServices(this IServiceCollection services)
         {
             services.AddScoped<IStateDomainService, StateDomainService>();
             services.AddScoped<ICountryDomainService, CountryDomainService>();

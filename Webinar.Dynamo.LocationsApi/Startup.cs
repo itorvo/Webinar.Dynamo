@@ -26,7 +26,7 @@ namespace Webinar.Dynamo.LocationsApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Webinar.Dynamo.LocationsApi", Version = "v1" });
             });
 
-            InjectionDependencies.InjectionServices(services);
+            services.InjectionServices();
 
             services.AddCors(options => options.AddPolicy("AllowOrigin",
                 builder => builder.AllowAnyOrigin()

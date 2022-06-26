@@ -40,7 +40,6 @@ namespace Webinar.Dynamo.LambdaState
                 if (request.Path.EndsWith("/state"))
                 {
                     return ProcessState(request);
-
                 }
                 else if (request.Path.EndsWith("/country"))
                 {

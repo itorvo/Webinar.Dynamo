@@ -11,7 +11,8 @@ namespace Webinar.Dynamo.LocationsApi.Controllers
             return Ok(new
             {
                 id = $"{System.DateTime.UtcNow.AddHours(-5).Ticks}",
-                message = "hola mundo"
+                message = "hola mundo",
+                HostName = System.Net.Dns.GetHostName()
             });
         }
     }

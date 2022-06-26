@@ -3,7 +3,7 @@
     "region" : "us-east-1",
     "profile" : "default",
     "configuration" : "Release",
-    "image-tag"     : "test-docker-ec2:api",
+    "image-tag"     : "webinardynamolocationsapi:latest",
     "docker-build-working-dir" : "",
     "vstoolkit-deployment-mode" : "PushOnly"
 }
