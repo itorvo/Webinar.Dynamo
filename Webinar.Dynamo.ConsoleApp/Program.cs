@@ -25,15 +25,7 @@ namespace Webinar.Dynamo.ConsoleApp
               .AddJsonFile("appsettings.json", true, true)
               .Build();
 
-            args.ToList().ForEach(arg => Console.WriteLine(arg));
-
-            var environments = Environment.GetEnvironmentVariables();
-            var keys = environments.Keys;
-
-            foreach (var key in keys)
-            {
-                Console.WriteLine($"{key}:{environments[key]}");
-            }
+            FillTables();
         }
 
         private static void FillTables()
@@ -43,8 +35,8 @@ namespace Webinar.Dynamo.ConsoleApp
 
             GetStatesByCountryPaginatedControl(stateRepository);
 
-            FillTables(stateRepository, countryRepository);
-            GetStatesByCountryPaginatedControl(stateRepository);
+            //FillTables(stateRepository, countryRepository);
+            //GetStatesByCountryPaginatedControl(stateRepository);
         }
 
         private static void FillTables(IStateRepository stateRepository, ICountryRepository countryRepository)
